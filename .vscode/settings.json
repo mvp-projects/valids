@@ -1,0 +1,28 @@
+{
+    "window.zoomLevel": 0.3,
+    "editor.minimap.enabled": true,
+    "editor.renderWhitespace": "all",
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        88,
+        100
+    ],
+    "python.testing.pytestArgs": [
+        "tests",
+        // https://github.com/microsoft/vscode-python/issues/693#issuecomment-367856613
+        "--no-cov",
+    ],
+    "[python]": {
+        "gitlens.codeLens.symbolScopes": [
+            "!Module"
+        ],
+        "editor.wordBasedSuggestions": true,
+    },
+    "python.linting.lintOnSave": true,
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "python.linting.mypyEnabled": true,
+    "python.linting.mypyPath": "mypy",
+    "python.testing.pytestEnabled": true,
+    "python.analysis.typeCheckingMode": "off" // Mypy is doing this.
+}
