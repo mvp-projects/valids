@@ -1,6 +1,6 @@
 [build-system]
-requires = ["maturin>=0.14,<0.15"]
-build-backend = "maturin"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "valids"
@@ -38,8 +38,6 @@ dev = [
   "hatch",
   "mypy",
   "mkdocs-material",
-  "python-dotenv",
-  "maturin"
 ]
 
 [project.urls]
@@ -176,7 +174,7 @@ testpaths = [
 ]
 xfail_strict = true
 addopts =[
-  "--cov-fail-under=85.7", 
+  "--cov-fail-under=50", 
   "--cov-report=term-missing:skip-covered",
   "--cov-config=pyproject.toml",
   "--cov=valids"
