@@ -5,7 +5,7 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
-name = "_valids_rs"
+name = "valids_rs"
 crate-type = ["cdylib"]
 
 [dependencies]
