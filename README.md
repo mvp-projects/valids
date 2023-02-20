@@ -8,16 +8,24 @@
 
 **Table of Contents**
 
-- valids[#valids]
-  - [Inspiration](#inspiration)
-  - [How to run?](#how-to-run)
+```python
+from valids import valid
+from valids.exceptions import ValueValidationError
+from valids.typing import Int16
 
-## Inspiration
-Nor Pydantic, FastAPI, Ruff, ... seem to use `Poetry` to manage dependencies. In fact, since Poetry's last update to `v1.20` I have encounter quite a few problems running different project. Another huge issue is that `Poetry` does not respect the [PEP 621](https://peps.python.org/pep-0621/) standard which may cause issue when the project interacts with libraries that expect an standard format for the `pyproject.toml` file.
-
-This Template Project does not require any Package Manager, it runs purely with native Python solutions (`.venv`, for example) and sticks with `requirements.txt` files to manage dependencies (Which, btw, is the pythonic way to handle this).
-
-## How to run?
-- Create a virtual environment
-- Activate the environment
-- run `make install env=dev`
+try:
+    valid(
+        dtype=Int16,
+        v=12_123,
+    ).equal(
+        other=12_123,
+    ).multiple_of(
+        of=3,
+    ).less_than(
+        other=100_000,
+    ).greater_than(
+        other=10_000,
+    )
+except ValueValidationError as e:
+    print(f"Value didn't pass validation. {e}")
+```
