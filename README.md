@@ -7,13 +7,13 @@
 | valids/\_\_init\_\_.py            |        2 |        0 |        0 |        0 |    100.0% |           |
 | valids/base.py                    |        5 |        0 |        0 |        0 |    100.0% |           |
 | valids/exceptions.py              |        3 |        0 |        0 |        0 |    100.0% |           |
-| valids/factory.py                 |       22 |        0 |       16 |        0 |    100.0% |           |
+| valids/factory.py                 |       26 |        0 |       20 |        0 |    100.0% |           |
 | valids/typing.py                  |       22 |        1 |        0 |        0 |     95.5% |        22 |
-| valids/validators/\_\_init\_\_.py |        3 |        0 |        0 |        0 |    100.0% |           |
+| valids/validators/\_\_init\_\_.py |        4 |        0 |        0 |        0 |    100.0% |           |
 | valids/validators/boolean.py      |       18 |        0 |        6 |        0 |    100.0% |           |
 | valids/validators/numeric.py      |      120 |        2 |       48 |        0 |     98.8% |  224, 233 |
 | valids/validators/string.py       |       55 |        0 |       24 |        0 |    100.0% |           |
-|                         **TOTAL** |  **250** |    **3** |   **94** |    **0** | **99.1%** |           |
+|                         **TOTAL** |  **255** |    **3** |   **98** |    **0** | **99.2%** |           |
 
 
 ## Setup coverage badge
