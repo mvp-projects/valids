@@ -1,11 +1,12 @@
 """Test validator factory."""
-from typing import Any, Type, Union
+from typing import Any
 
 import pytest
 
 from valids.base import IValidator
 from valids.factory import valid
 from valids.typing import (
+    Boolean,
     DataType,
     Int8,
     Int16,
@@ -15,8 +16,10 @@ from valids.typing import (
     UInt16,
     UInt32,
     UInt64,
+    Utf8,
 )
 from valids.validators import (
+    BooleanTypeValidator,
     Int8TypeValidator,
     Int16TypeValidator,
     Int32TypeValidator,
@@ -25,6 +28,7 @@ from valids.validators import (
     UInt16TypeValidator,
     UInt32TypeValidator,
     UInt64TypeValidator,
+    Utf8TypeValidator,
 )
 
 
@@ -75,15 +79,25 @@ from valids.validators import (
             10,
             UInt64TypeValidator,
         ),
+        (
+            Boolean,
+            False,
+            BooleanTypeValidator,
+        ),
+        (
+            Utf8,
+            "asd",
+            Utf8TypeValidator,
+        ),
     ],
 )
 def test_factory_validator_building(
-    dtype: Union[Type[Int8], Type[Int16]],
+    dtype: DataType,
     value: Any,
     expected_validator: IValidator,
 ) -> None:
     """Test factory returns correct type of validator."""
-    validator = valid(dtype=dtype, v=value)
+    validator = valid(dtype=dtype, v=value)  # type:ignore[call-overload]
     assert isinstance(validator, expected_validator)  # type:ignore[arg-type]
 
 

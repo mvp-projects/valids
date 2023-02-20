@@ -2,8 +2,20 @@
 from typing import Any, Type, Union, overload
 
 from valids.base import IValidator
-from valids.typing import Int8, Int16, Int32, Int64, UInt8, UInt16, UInt32, UInt64
+from valids.typing import (
+    Boolean,
+    Int8,
+    Int16,
+    Int32,
+    Int64,
+    UInt8,
+    UInt16,
+    UInt32,
+    UInt64,
+    Utf8,
+)
 from valids.validators import (
+    BooleanTypeValidator,
     Int8TypeValidator,
     Int16TypeValidator,
     Int32TypeValidator,
@@ -12,6 +24,7 @@ from valids.validators import (
     UInt16TypeValidator,
     UInt32TypeValidator,
     UInt64TypeValidator,
+    Utf8TypeValidator,
 )
 
 
@@ -55,7 +68,17 @@ def valid(dtype: Type[UInt64], v: int) -> UInt64TypeValidator:
     ...
 
 
-def valid(  # noqa: PLR0911
+@overload
+def valid(dtype: Type[Boolean], v: int) -> BooleanTypeValidator:
+    ...
+
+
+@overload
+def valid(dtype: Type[Utf8], v: int) -> Utf8TypeValidator:
+    ...
+
+
+def valid(  # noqa: PLR0911, C901
     dtype: Union[
         Type[Int8],
         Type[Int16],
@@ -65,6 +88,8 @@ def valid(  # noqa: PLR0911
         Type[UInt16],
         Type[UInt32],
         Type[UInt64],
+        Type[Boolean],
+        Type[Utf8],
     ],
     v: Any,
 ) -> IValidator:
@@ -85,5 +110,8 @@ def valid(  # noqa: PLR0911
         return Int64TypeValidator(value=v)
     if dtype == UInt64:
         return UInt64TypeValidator(value=v)
-
+    if dtype == Boolean:
+        return BooleanTypeValidator(value=v)
+    if dtype == Utf8:
+        return Utf8TypeValidator(value=v)
     raise RuntimeError(f"{str(dtype)} is not being handled by the factory.")

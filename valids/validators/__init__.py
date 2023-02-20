@@ -9,6 +9,7 @@ from valids.validators.numeric import (
     UInt32TypeValidator,
     UInt64TypeValidator,
 )
+from valids.validators.string import Utf8TypeValidator
 
 __all__ = [
     "Int8TypeValidator",
@@ -20,4 +21,5 @@ __all__ = [
     "UInt32TypeValidator",
     "UInt64TypeValidator",
     "BooleanTypeValidator",
+    "Utf8TypeValidator",
 ]
