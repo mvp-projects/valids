@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "valids"
-description = "Validation library written in Rust"
+description = "Value validation made SUPER easy."
 readme = "README.md"
 requires-python = ">=3.9"
 keywords = []
