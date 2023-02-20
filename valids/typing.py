@@ -1,8 +1,5 @@
 """Valids custom type annotations."""
 
-from typing import Any, TypeAlias, Union
-
-ValidsDataType: TypeAlias = Union["DataTypeClass", "DataType"]
 
 __all__ = [
     "Int8",
@@ -18,24 +15,11 @@ __all__ = [
 ]
 
 
-class DataTypeClass(type):
+class DataType(type):
     """Metaclass for nicely printing DataType classes."""
 
     def __repr__(cls) -> str:  # noqa: D105
         return cls.__name__
-
-
-class DataType(metaclass=DataTypeClass):
-    """Base class for all valids data types."""
-
-    def __new__(  # type:ignore[misc]  # noqa: D102
-        cls,
-        *args: Any,
-        **kwargs: Any,
-    ) -> ValidsDataType:
-        if args or kwargs:
-            return super().__new__(cls=cls)
-        return cls
 
 
 class _NumericType(DataType):

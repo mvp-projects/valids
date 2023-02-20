@@ -1,5 +1,5 @@
 """Test numeric related validators."""
-from typing import Type, Union
+from typing import Type
 
 import pytest
 
@@ -10,7 +10,6 @@ from valids.validators.numeric import (
     Int32TypeValidator,
     Int64TypeValidator,
     IntegralTypeValidator,
-    NumericTypeValidator,
     UInt8TypeValidator,
     UInt16TypeValidator,
     UInt32TypeValidator,
@@ -231,7 +230,7 @@ class TestUInt64TypeValidator:
 
 
 @pytest.mark.parametrize(
-    argnames="numeric_type_validator",
+    argnames="integral_type_validator",
     argvalues=[
         Int8TypeValidator,
         Int16TypeValidator,
@@ -241,134 +240,6 @@ class TestUInt64TypeValidator:
 )
 class TestNumericTypeValidator:
     """Test related to all numeric types."""
-
-    @pytest.mark.parametrize(
-        argnames=["number", "gt"],
-        argvalues=[
-            (10, 3),
-        ],
-    )
-    def test_greater_than_pass(
-        self,
-        numeric_type_validator: Type[NumericTypeValidator],
-        number: Union[float, int],
-        gt: Union[float, int],
-    ) -> None:
-        """Test greater_than works as expected."""
-        numeric_type_validator(value=number).greater_than(other=gt)
-
-    @pytest.mark.parametrize(
-        argnames=["number", "gt"],
-        argvalues=[
-            (10, 30),
-            (30, 30),
-        ],
-    )
-    def test_greater_than_fail(
-        self,
-        numeric_type_validator: Type[NumericTypeValidator],
-        number: Union[float, int],
-        gt: Union[float, int],
-    ) -> None:
-        """Test greater_than fails as expected."""
-        with pytest.raises(ValueValidationError):
-            numeric_type_validator(value=number).greater_than(other=gt)
-
-    @pytest.mark.parametrize(
-        argnames=["number", "get"],
-        argvalues=[
-            (30, 10),
-            (30, 30),
-        ],
-    )
-    def test_greater_equal_than_pass(
-        self,
-        numeric_type_validator: Type[NumericTypeValidator],
-        number: Union[float, int],
-        get: Union[float, int],
-    ) -> None:
-        """Test greater_equal_than works as expected."""
-        numeric_type_validator(value=number).greater_equal_than(other=get)
-
-    @pytest.mark.parametrize(
-        argnames=["number", "get"],
-        argvalues=[
-            (10, 30),
-        ],
-    )
-    def test_greater_equal_than_fail(
-        self,
-        numeric_type_validator: Type[NumericTypeValidator],
-        number: Union[float, int],
-        get: Union[float, int],
-    ) -> None:
-        """Test greater_equal_than fails as expected."""
-        with pytest.raises(ValueValidationError):
-            numeric_type_validator(value=number).greater_equal_than(other=get)
-
-    @pytest.mark.parametrize(
-        argnames=["number", "lt"],
-        argvalues=[
-            (1, 3),
-        ],
-    )
-    def test_less_than_pass(
-        self,
-        numeric_type_validator: Type[NumericTypeValidator],
-        number: Union[float, int],
-        lt: Union[float, int],
-    ) -> None:
-        """Test less_than works as expected."""
-        numeric_type_validator(value=number).less_than(other=lt)
-
-    @pytest.mark.parametrize(
-        argnames=["number", "lt"],
-        argvalues=[
-            (100, 30),
-            (30, 30),
-        ],
-    )
-    def test_less_than_fail(
-        self,
-        numeric_type_validator: Type[NumericTypeValidator],
-        number: Union[float, int],
-        lt: Union[float, int],
-    ) -> None:
-        """Test less_than fails as expected."""
-        with pytest.raises(ValueValidationError):
-            numeric_type_validator(value=number).less_than(other=lt)
-
-    @pytest.mark.parametrize(
-        argnames=["number", "let"],
-        argvalues=[
-            (1, 3),
-            (3, 3),
-        ],
-    )
-    def test_less_equal_than_pass(
-        self,
-        numeric_type_validator: Type[NumericTypeValidator],
-        number: Union[float, int],
-        let: Union[float, int],
-    ) -> None:
-        """Test less_equal_than works as expected."""
-        numeric_type_validator(value=number).less_equal_than(other=let)
-
-    @pytest.mark.parametrize(
-        argnames=["number", "let"],
-        argvalues=[
-            (100, 30),
-        ],
-    )
-    def test_less_equal_than_fail(
-        self,
-        numeric_type_validator: Type[NumericTypeValidator],
-        number: Union[float, int],
-        let: Union[float, int],
-    ) -> None:
-        """Test less_equal_than fails as expected."""
-        with pytest.raises(ValueValidationError):
-            numeric_type_validator(value=number).less_equal_than(other=let)
 
 
 @pytest.mark.parametrize(
@@ -447,3 +318,131 @@ class TestIntegralTypeValidator:
         """Test equal fails as expected."""
         with pytest.raises(ValueValidationError):
             integral_type_validator(value=number).equal(other=other)
+
+    @pytest.mark.parametrize(
+        argnames=["number", "gt"],
+        argvalues=[
+            (10, 3),
+        ],
+    )
+    def test_greater_than_pass(
+        self,
+        integral_type_validator: Type[IntegralTypeValidator],
+        number: int,
+        gt: int,
+    ) -> None:
+        """Test greater_than works as expected."""
+        integral_type_validator(value=number).greater_than(other=gt)
+
+    @pytest.mark.parametrize(
+        argnames=["number", "gt"],
+        argvalues=[
+            (10, 30),
+            (30, 30),
+        ],
+    )
+    def test_greater_than_fail(
+        self,
+        integral_type_validator: Type[IntegralTypeValidator],
+        number: int,
+        gt: int,
+    ) -> None:
+        """Test greater_than fails as expected."""
+        with pytest.raises(ValueValidationError):
+            integral_type_validator(value=number).greater_than(other=gt)
+
+    @pytest.mark.parametrize(
+        argnames=["number", "get"],
+        argvalues=[
+            (30, 10),
+            (30, 30),
+        ],
+    )
+    def test_greater_equal_than_pass(
+        self,
+        integral_type_validator: Type[IntegralTypeValidator],
+        number: int,
+        get: int,
+    ) -> None:
+        """Test greater_equal_than works as expected."""
+        integral_type_validator(value=number).greater_equal_than(other=get)
+
+    @pytest.mark.parametrize(
+        argnames=["number", "get"],
+        argvalues=[
+            (10, 30),
+        ],
+    )
+    def test_greater_equal_than_fail(
+        self,
+        integral_type_validator: Type[IntegralTypeValidator],
+        number: int,
+        get: int,
+    ) -> None:
+        """Test greater_equal_than fails as expected."""
+        with pytest.raises(ValueValidationError):
+            integral_type_validator(value=number).greater_equal_than(other=get)
+
+    @pytest.mark.parametrize(
+        argnames=["number", "lt"],
+        argvalues=[
+            (1, 3),
+        ],
+    )
+    def test_less_than_pass(
+        self,
+        integral_type_validator: Type[IntegralTypeValidator],
+        number: int,
+        lt: int,
+    ) -> None:
+        """Test less_than works as expected."""
+        integral_type_validator(value=number).less_than(other=lt)
+
+    @pytest.mark.parametrize(
+        argnames=["number", "lt"],
+        argvalues=[
+            (100, 30),
+            (30, 30),
+        ],
+    )
+    def test_less_than_fail(
+        self,
+        integral_type_validator: Type[IntegralTypeValidator],
+        number: int,
+        lt: int,
+    ) -> None:
+        """Test less_than fails as expected."""
+        with pytest.raises(ValueValidationError):
+            integral_type_validator(value=number).less_than(other=lt)
+
+    @pytest.mark.parametrize(
+        argnames=["number", "let"],
+        argvalues=[
+            (1, 3),
+            (3, 3),
+        ],
+    )
+    def test_less_equal_than_pass(
+        self,
+        integral_type_validator: Type[IntegralTypeValidator],
+        number: int,
+        let: int,
+    ) -> None:
+        """Test less_equal_than works as expected."""
+        integral_type_validator(value=number).less_equal_than(other=let)
+
+    @pytest.mark.parametrize(
+        argnames=["number", "let"],
+        argvalues=[
+            (100, 30),
+        ],
+    )
+    def test_less_equal_than_fail(
+        self,
+        integral_type_validator: Type[IntegralTypeValidator],
+        number: int,
+        let: int,
+    ) -> None:
+        """Test less_equal_than fails as expected."""
+        with pytest.raises(ValueValidationError):
+            integral_type_validator(value=number).less_equal_than(other=let)
