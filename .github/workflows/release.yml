@@ -28,23 +28,23 @@ jobs:
         path: dist/*
         if-no-files-found: error
 
-#   publish:
-#     name: Publish release
-#     needs:
-#     - build
-#     runs-on: ubuntu-latest
+  publish:
+    name: Publish release
+    needs:
+    - build
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - uses: actions/download-artifact@v3
-#       with:
-#         name: artifacts
-#         path: dist
+    steps:
+    - uses: actions/download-artifact@v3
+      with:
+        name: artifacts
+        path: dist
 
-#     - name: Push build artifacts to PyPI
-#       uses: pypa/gh-action-pypi-publish@v1.6.4
-#       with:
-#         skip_existing: true
-#         user: __token__
-#         password: ${{ secrets.PYPI_TOKEN }}
+    - name: Push build artifacts to PyPI
+      uses: pypa/gh-action-pypi-publish@v1.6.4
+      with:
+        skip_existing: true
+        user: __token__
+        password: ${{ secrets.PYPI_TOKEN }}
 
 

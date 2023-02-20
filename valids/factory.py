@@ -1,9 +1,10 @@
 """Validator factory method."""
-from typing import Any, Type, Union, overload
+from typing import Any, Dict, Type, overload
 
 from valids.base import IValidator
 from valids.typing import (
     Boolean,
+    DataType,
     Int8,
     Int16,
     Int32,
@@ -69,49 +70,33 @@ def valid(dtype: Type[UInt64], v: int) -> UInt64TypeValidator:
 
 
 @overload
-def valid(dtype: Type[Boolean], v: int) -> BooleanTypeValidator:
+def valid(dtype: Type[Boolean], v: bool) -> BooleanTypeValidator:  # noqa: FBT001
     ...
 
 
 @overload
-def valid(dtype: Type[Utf8], v: int) -> Utf8TypeValidator:
+def valid(dtype: Type[Utf8], v: str) -> Utf8TypeValidator:
     ...
 
 
-def valid(  # noqa: PLR0911, C901
-    dtype: Union[
-        Type[Int8],
-        Type[Int16],
-        Type[Int32],
-        Type[Int64],
-        Type[UInt8],
-        Type[UInt16],
-        Type[UInt32],
-        Type[UInt64],
-        Type[Boolean],
-        Type[Utf8],
-    ],
+def valid(
+    dtype: Type[DataType],
     v: Any,
 ) -> IValidator:
     """Value is the entrypoint of the eager module."""
-    if dtype == Int8:
-        return Int8TypeValidator(value=v)
-    if dtype == UInt8:
-        return UInt8TypeValidator(value=v)
-    if dtype == Int16:
-        return Int16TypeValidator(value=v)
-    if dtype == UInt16:
-        return UInt16TypeValidator(value=v)
-    if dtype == Int32:
-        return Int32TypeValidator(value=v)
-    if dtype == UInt32:
-        return UInt32TypeValidator(value=v)
-    if dtype == Int64:
-        return Int64TypeValidator(value=v)
-    if dtype == UInt64:
-        return UInt64TypeValidator(value=v)
-    if dtype == Boolean:
-        return BooleanTypeValidator(value=v)
-    if dtype == Utf8:
-        return Utf8TypeValidator(value=v)
+    type_to_validator_mapper: Dict[Type[DataType], Type[IValidator]] = {
+        Int8: Int8TypeValidator,
+        UInt8: UInt8TypeValidator,
+        Int16: Int16TypeValidator,
+        UInt16: UInt16TypeValidator,
+        Int32: Int32TypeValidator,
+        UInt32: UInt32TypeValidator,
+        Int64: Int64TypeValidator,
+        UInt64: UInt64TypeValidator,
+        Boolean: BooleanTypeValidator,
+        Utf8: Utf8TypeValidator,
+    }
+    validator = type_to_validator_mapper.get(dtype)
+    if validator:
+        return validator(value=v)
     raise RuntimeError(f"{str(dtype)} is not being handled by the factory.")
