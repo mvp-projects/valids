@@ -1,13 +1,13 @@
 from valids.validators.numeric import (
-    Int8Validator,
-    Int16Validator,
-    Int32Validator,
-    Int64Validator,
+    Int8TypeValidator,
+    Int16TypeValidator,
+    Int32TypeValidator,
+    Int64TypeValidator,
 )
 
 __all__ = [
-    "Int8Validator",
-    "Int16Validator",
-    "Int32Validator",
-    "Int64Validator",
+    "Int8TypeValidator",
+    "Int16TypeValidator",
+    "Int32TypeValidator",
+    "Int64TypeValidator",
 ]
